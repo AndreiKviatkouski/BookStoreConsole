@@ -8,6 +8,11 @@ public class BookServiceImpl implements BookService {
 
     private BookStorage bookStorage = new BookStorageImpl();
 
+    public static void main(String[] args) {
+        BookServiceImpl bookService = new BookServiceImpl();
+
+    }
+
     @Override
     public boolean save(Book book) {
         if (bookStorage.contains(book)) {

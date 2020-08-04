@@ -7,6 +7,10 @@ import java.util.Arrays;
 public class BookStorageImpl implements BookStorage {
     private static Book[] books = new Book[50];
 
+    public static void main(String[] args) {
+
+    }
+
     @Override
     public boolean save(Book book) {
         for (int i = 0; i < books.length; i++) {
@@ -154,6 +158,7 @@ public class BookStorageImpl implements BookStorage {
     @Override
     public boolean contains(Book book) {
         for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) break;
             if (books[i].equals(book)) {
                 return true;
             }
