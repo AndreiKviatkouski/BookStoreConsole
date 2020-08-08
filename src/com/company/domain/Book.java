@@ -1,5 +1,6 @@
 package com.company.domain;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class Book {
@@ -7,20 +8,26 @@ public class Book {
     private int id = incId++;
     private String title;
     private String description;
-    private double price;
-    private String author;
+    private BigDecimal price;
+    private Author author;
+
+//    public static void main(String[] args) {
+//        BigDecimal bigDecimal = new BigDecimal(22.56654);
+//        bigDecimal.setScale(2, RoundingMode.DOWN);
+//        System.out.println(bigDecimal.doubleValue());
+//    }
 
     public Book() {
     }
 
-    public Book(String title, String description, double price, String author) {
+    public Book(String title, String description, BigDecimal price, Author author) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.author = author;
     }
 
-    public Book(int id, String title, String description, double price, String author) {
+    public Book(int id, String title, String description, BigDecimal price, Author author) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -52,19 +59,19 @@ public class Book {
         this.description = description;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 

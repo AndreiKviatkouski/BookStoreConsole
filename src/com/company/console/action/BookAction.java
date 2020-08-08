@@ -1,15 +1,21 @@
 package com.company.console.action;
 
 import com.company.console.validator.BookValidator;
+import com.company.domain.Author;
 import com.company.domain.Book;
+import com.company.service.AuthorService;
+import com.company.service.AuthorServiceImpl;
 import com.company.service.BookService;
 import com.company.service.BookServiceImpl;
+
+import java.math.BigDecimal;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Writer.*;
 
 public class BookAction {
     private BookService bookService = new BookServiceImpl();
+    private AuthorService authorService = new AuthorServiceImpl();
 
     public void add() {
         writeString("Enter title");
@@ -26,19 +32,21 @@ public class BookAction {
             return;
         }
 
-        writeString("Enter author");
-        String author = readString();
-        if (!BookValidator.validAuthor(desc)){
-            writeString("Invalid author");
-            return;
+        writeString("Select author");
+        Author[] all = authorService.getAll();
+        for (int i = 0; i < all.length; i++) {
+            writeString((i + 1) + " Author: " + all[i].getFullName());
         }
+        int i = readInt() - 1;
+        Author author = all[i];
+
         writeString("Enter price");
         double price = readDouble();
         if (!BookValidator.validPrice(price)){
             writeString("Invalid price");
             return;
         }
-        Book book = new Book(title, desc, price, author);
+        Book book = new Book(title, desc, new BigDecimal(price), author);
         bookService.save(book);
     }
 
@@ -59,12 +67,13 @@ public class BookAction {
     }
 
     public void updateAuthor() {
-        writeString("Enter author");
-        String author = readString();
-        if (!BookValidator.validAuthor(author)){
-            writeString("Invalid author");
-            return;
+        writeString("Select author");
+        Author[] all = authorService.getAll();
+        for (int i = 0; i < all.length; i++) {
+            writeString((i + 1) + " Author: " + all[i].getFullName());
         }
+        int i = readInt() - 1;
+        Author author = all[i];
 
         writeString("Enter id");
         int id = readInt();
@@ -89,7 +98,7 @@ public class BookAction {
             writeString("Invalid id");
             return;
         }
-        bookService.updatePrice(price, id);
+        bookService.updatePrice(new BigDecimal(price), id);
     }
 
     public void updateDescription() {
@@ -154,7 +163,7 @@ public class BookAction {
             writeString("Invalid price");
             return;
         }
-        Book[] all = bookService.getAllByPrice(price);
+        Book[] all = bookService.getAllByPrice(new BigDecimal(price));
         for (int i = 0; i < all.length; i++) {
             writeString((i + 1) + " " + all[i].getPrice());
         }

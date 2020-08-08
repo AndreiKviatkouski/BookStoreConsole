@@ -1,17 +1,15 @@
 package com.company.service;
 
+import com.company.domain.Author;
 import com.company.domain.Book;
 import com.company.storage.BookStorage;
 import com.company.storage.BookStorageImpl;
 
+import java.math.BigDecimal;
+
 public class BookServiceImpl implements BookService {
 
     private BookStorage bookStorage = new BookStorageImpl();
-
-    public static void main(String[] args) {
-        BookServiceImpl bookService = new BookServiceImpl();
-
-    }
 
     @Override
     public boolean save(Book book) {
@@ -31,7 +29,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String updateAuthor(String author, int id) {
+    public Author updateAuthor(Author author, int id) {
         if (bookStorage.contains(id)) {
             return bookStorage.updateAuthor(author, id);
         }
@@ -39,11 +37,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public double updatePrice(double price, int id) {
+    public BigDecimal updatePrice(BigDecimal price, int id) {
         if (bookStorage.contains(id)) {
             return bookStorage.updatePrice(price, id);
         }
-        return 0;
+        return null;
     }
 
     @Override
@@ -83,7 +81,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book[] getAllByPrice(double price) {
+    public Book[] getAllByPrice(BigDecimal price) {
         return bookStorage.getAllByPrice(price);
     }
 

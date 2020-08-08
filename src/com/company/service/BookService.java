@@ -1,13 +1,16 @@
 package com.company.service;
 
+import com.company.domain.Author;
 import com.company.domain.Book;
+
+import java.math.BigDecimal;
 
 public interface BookService {
     boolean save(Book book);
 
     String updateTitleById(String title, int id);
-    String updateAuthor(String author, int id);
-    double updatePrice(double price, int id);
+    Author updateAuthor(Author author, int id);
+    BigDecimal updatePrice(BigDecimal price, int id);
     String updateDescription(String desc, int id);
 
     void remove(int id);
@@ -15,7 +18,7 @@ public interface BookService {
 
     Book getById(int id);
     Book[] getAll();
-    Book[] getAllByPrice(double price);
+    Book[] getAllByPrice(BigDecimal price);
     Book[] getAllByAuthor(String author);
     Book getByTitle(String title);
 }

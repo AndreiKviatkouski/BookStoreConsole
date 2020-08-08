@@ -1,7 +1,9 @@
 package com.company.storage;
 
+import com.company.domain.Author;
 import com.company.domain.Book;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 
 public class BookStorageImpl implements BookStorage {
@@ -35,27 +37,27 @@ public class BookStorageImpl implements BookStorage {
     }
 
     @Override
-    public String updateAuthor(String author, int id) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getId() == id) {
-                String old = books[i].getAuthor();
-                books[i].setAuthor(author);
-                return old;
-            }
-        }
+    public Author updateAuthor(Author author, int id) {
+//        for (int i = 0; i < books.length; i++) {
+//            if (books[i].getId() == id) {
+//                String old = books[i].getAuthor();
+//                books[i].setAuthor(author);
+//                return old;
+//            }
+//        }
         return null;
     }
 
     @Override
-    public double updatePrice(double price, int id) {
+    public BigDecimal updatePrice(BigDecimal price, int id) {
         for (int i = 0; i < books.length; i++) {
             if (books[i].getId() == id) {
-                double priceOld = books[i].getPrice();
+                BigDecimal priceOld = books[i].getPrice();
                 books[i].setPrice(price);
                 return priceOld;
             }
         }
-        return -1;
+        return null;
     }
 
     @Override
@@ -121,10 +123,10 @@ public class BookStorageImpl implements BookStorage {
     }
 
     @Override
-    public Book[] getAllByPrice(double price) {//
+    public Book[] getAllByPrice(BigDecimal price) {//
         int count = 0;
         for (Book book : books) {
-            if (book.getPrice() == price) {
+            if (book.getPrice().equals(price)) {
                 count++;
                 return Arrays.copyOf(books, count);
             }
