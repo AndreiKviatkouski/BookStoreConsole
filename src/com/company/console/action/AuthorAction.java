@@ -12,7 +12,7 @@ import static com.company.console.util.Writer.writeString;
 
 public class AuthorAction {
     private AuthorService authorService = new AuthorServiceImpl();
-    //private Author author = new Author();
+
 
     public void add() {
         writeString("Enter Name");

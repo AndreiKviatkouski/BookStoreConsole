@@ -1,5 +1,6 @@
 package com.company.storage;
 
+import com.company.console.util.Writer;
 import com.company.domain.Author;
 import com.company.domain.Book;
 
@@ -9,9 +10,6 @@ import java.util.Arrays;
 public class BookStorageImpl implements BookStorage {
     private static Book[] books = new Book[50];
 
-    public static void main(String[] args) {
-
-    }
 
     @Override
     public boolean save(Book book) {

@@ -18,15 +18,15 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author updateAuthor(Author author, int id) {
-        if (authorStorage.contains(id)){
-           return authorStorage.updateAuthor(author, id);
+        if (authorStorage.contains(id)) {
+            return authorStorage.updateAuthor(author, id);
         }
         return null;
     }
 
     @Override
     public void remove(int id) {
-        if (authorStorage.contains(id)){
+        if (authorStorage.contains(id)) {
             authorStorage.remove(id);
         }
 
@@ -34,7 +34,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public void remove(Author author) {
-        if (authorStorage.contains(author)){
+        if (authorStorage.contains(author)) {
             authorStorage.remove(author);
         }
 
@@ -42,8 +42,8 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     public Author getById(int id) {
-        if (authorStorage.contains(id)){
-           return authorStorage.getById(id);
+        if (authorStorage.contains(id)) {
+            return authorStorage.getById(id);
         }
         return null;
     }

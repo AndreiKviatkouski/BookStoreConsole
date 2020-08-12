@@ -86,11 +86,10 @@ public class AuthorStorageImpl implements AuthorStorage {
 
     @Override
     public boolean contains(Author author) {
-        for (int i = 0; i < authors.length; i++) {
-            if (authors[i].equals(author)) {
-                return true;
+        for (Author value : authors) {
+            if (value != null) {
+                return value.equals(author);
             }
-
         }
         return false;
     }
