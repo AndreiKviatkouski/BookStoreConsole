@@ -3,15 +3,14 @@ package com.company.console;
 import com.company.console.action.AuthorAction;
 import com.company.console.action.BookAction;
 import com.company.console.action.UserAction;
-import com.company.console.util.Writer;
 import com.company.domain.Role;
-
-import java.io.IOException;
+import com.company.domain.Session;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Writer.*;
 
 public class ConsoleApplication {
+
     public static Session session = null;
 
     private BookAction bookAction = new BookAction();
@@ -19,12 +18,11 @@ public class ConsoleApplication {
     private UserAction userAction = new UserAction();
 
 
-
-    public void run(){
-        while (true){
-            if (session == null){
+    public void run() {
+        while (true) {
+            if (session == null) {
                 showRegMenu();
-                switch (readInt()){
+                switch (readInt()) {
                     case 0:
                         return;
                     case 1:
@@ -36,129 +34,186 @@ public class ConsoleApplication {
                     default:
                         writeString("Operation not found");
                 }
-            } else if (session.getUser().getRole().equals(Role.USER)){
+
+
+            } else if (ConsoleApplication.session.getUser().getRole().equals(Role.USER)) {
                 showUserMenu();
-                switch (readInt()){
+                switch (readInt()) {
+                    case 0:
+                        return;
+                    case 1:
+                        bookAction.getAll();
+                        break;
+                    case 2:
+                        bookAction.getByTitle();
+                        break;
+                    case 3:
+                        bookAction.getAllByAuthor();
+                        break;
+                    case 4:
+                        bookAction.getById();
+                        break;
+                    case 5:
+                        bookAction.getAllByPrice();
+                        break;
+                    case 6:
+                        showUpdateUserMenu();
+                        switch (readInt()) {
+                            case 0:
+                                return;
+                            case 1:
+                                userAction.updateUserByLogin();
+                                break;
+                            case 2:
+                                userAction.updateUserByPassword();
+                                break;
+                            case 3:
+                                userAction.updateUserByName();
+                                break;
+                            default:
+                                writeString("Operation not found");
+                                continue;
+                        }
+
+                    default:
+                        writeString("Operation not found");
 
                 }
-            } else if (session.getUser().getRole().equals(Role.ADMIN)){
-                showAdminMenu();
-                switch (readInt()){
 
+
+            } else if (session.getUser().getRole().equals(Role.ADMIN)) {
+                showAdminMenu();
+                switch (readInt()) {
+                    case 0:
+                        return;
+                    case 1:
+                        showModifyUserMenu();
+                        switch (readInt()) {
+                            case 0:
+                                return;
+                            case 1:
+                                userAction.updateUserByLogin();
+                                break;
+                            case 2:
+                                userAction.updateUserByPassword();
+                                break;
+                            case 3:
+                                userAction.updateUserByName();
+                                break;
+                            case 4:
+                                userAction.getAll();
+                                break;
+                            case 5:
+//                                userAction.getUserByID();
+                                break;
+                            case 6:
+//                                userAction.getUserByLogin();
+                                break;
+                            case 7:
+//                                userAction.removeByID();
+                                break;
+
+                            default:
+                                writeString("Operation not found");
+                                continue;
+                        }
+
+                    case 2:
+                        showAuthorMenu();
+                        switch (readInt()) {
+                            case 0:
+                                return;
+                            case 1:
+                                authorAction.add();
+                                break;
+                            case 2:
+                                authorAction.updateAuthor();
+                                break;
+                            case 3:
+                                authorAction.remove();
+                                break;
+                            case 4:
+                                authorAction.removeById();
+                                break;
+                            case 5:
+                                authorAction.getById();
+                                break;
+                            case 6:
+                                bookAction.getAll();
+                                break;
+
+                            default:
+                                writeString("Operation not found");
+                                continue;
+                        }
+
+                    case 3:
+                        showBookMenu();
+                        switch (readInt()) {
+                            case 0:
+                                return;
+                            case 1:
+                                bookAction.add();
+                                break;
+                            case 2:
+                                bookAction.updateTitleById();
+                                break;
+                            case 3:
+                                bookAction.updateAuthor();
+                                break;
+                            case 4:
+                                bookAction.updatePrice();
+                                break;
+                            case 5:
+                                bookAction.updateDescription();
+                                break;
+                            case 6:
+                                bookAction.removeById();
+                                break;
+                            case 7:
+                                bookAction.remove();
+                                break;
+                            case 8:
+                                bookAction.getById();
+                                break;
+                            case 9:
+                                bookAction.getAll();
+                                break;
+                            case 10:
+                                bookAction.getAllByPrice();
+                                break;
+                            case 11:
+                                bookAction.getAllByAuthor();
+                                break;
+                            case 12:
+                                bookAction.getByTitle();
+                                break;
+                            default:
+                                writeString("Operation not found");
+
+                        }
                 }
             }
         }
     }
+
+    private void showModifyUserMenu() {
+        writeString("0  - Exit");
+        writeString("1  - Update user by Login");
+        writeString("2  - Update user by Login");
+        writeString("3  - Update user by Login");
+        writeString("4  - Get all users");
+        writeString("5  - Get user by ID");
+        writeString("7 - Get user by login");
+        writeString("8  - Remove user by ID");
+    }
+
 
     private void showAdminMenu() {
-
-    }
-
-    public void runn() {
-
-        while (true) {
-            showRegMenu();
-            switch (readInt()) {
-                case 0:
-                    return;
-                case 1:
-                    userAction.reg();
-                    break;
-                case 2:
-                    userAction.auth();
-                    break;
-                case 3:
-                    userAction.getAll();
-                    break;
-                case 4:
-
-                    break;
-                default:
-                    writeString("Invalid operation");
-            }
-
-        }
-    }
-
-    public void startMenu() {
-        while (true) {
-            showMainMenu();
-            switch (readInt()) {
-                case 0:
-                    return;
-                case 1:
-                    showBookMenu();
-                    switch (readInt()) {
-                        case 1:
-                            bookAction.add();
-                            break;
-                        case 2:
-                            bookAction.updateTitleById();
-                            break;
-                        case 3:
-                            bookAction.updateAuthor();
-                            break;
-                        case 4:
-                            bookAction.updatePrice();
-                            break;
-                        case 5:
-                            bookAction.updateDescription();
-                            break;
-                        case 6:
-                            bookAction.removeById();
-                            break;
-                        case 7:
-                            bookAction.remove();
-                            break;
-                        case 8:
-                            bookAction.getById();
-                            break;
-                        case 9:
-                            bookAction.getAll();
-                            break;
-                        case 10:
-                            bookAction.getAllByPrice();
-                            break;
-                        case 11:
-                            bookAction.getAllByAuthor();
-                            break;
-                        case 12:
-                            bookAction.getByTitle();
-                            break;
-                        default:
-                            continue;
-                    }
-                case 2:
-                    showAuthorMenu();
-                    switch (readInt()) {
-                        case 1:
-                            authorAction.add();
-                            break;
-                        case 2:
-                            authorAction.updateAuthor();
-                            break;
-                        case 3:
-                            authorAction.removeById();
-                            break;
-                        case 4:
-                            authorAction.remove();
-                            break;
-                        case 5:
-                            authorAction.getById();
-                            break;
-                        case 6:
-                            authorAction.getAll();
-                            break;
-                        default:
-                            continue;
-                    }
-                case 3:
-                    showUserMenu();
-                    break;
-                default:
-                    //writeString("Operation not found!");
-            }
-        }
+        writeString("0  - Back");
+        writeString("1  - showModifyUserMenu");
+        writeString("2  - showAuthorMenu");
+        writeString("3  - showBookMenu");
     }
 
     private void showBookMenu() {
@@ -176,6 +231,7 @@ public class ConsoleApplication {
         writeString("11 - Get all by author");
         writeString("12 - Get all by title");
     }
+
 
     private void showAuthorMenu() {
         writeString("0  - Back");
@@ -198,14 +254,15 @@ public class ConsoleApplication {
         writeString("1  - Find all books");
         writeString("2  - Find book by title");
         writeString("3  - Find all books by author");
-        writeString("4  - Update login bu id");
-        writeString("5  - Update password by id");
-        writeString("6  - Update name by id");
+        writeString("4  - Find all books by id");
+        writeString("5  - Find all books by price");
     }
 
-    private void showMainMenu() {
-        writeString("0 - Back");
-        writeString("1 - Book");
-        writeString("2 - Author");
+    private void showUpdateUserMenu() {
+        writeString("1  - Update login by id");
+        writeString("2  - Update password by id");
+        writeString("3  - Update name by id");
     }
+
+
 }

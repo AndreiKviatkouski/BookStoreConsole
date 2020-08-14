@@ -25,6 +25,14 @@ public class User {
         this.password = password;
         this.name = name;
     }
+    public User(int id, String login, String password, String name, Role role) {
+        this.id = id;
+        this.login = login;
+        this.password = password;
+        this.name = name;
+        this.role = role;
+    }
+
 
     public static int getIncId() {
         return incId;
@@ -66,6 +74,7 @@ public class User {
         this.name = name;
     }
 
+
     public Role getRole() {
         return role;
     }
@@ -95,6 +104,7 @@ public class User {
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
+                ", role=" + role +
                 '}';
     }
 }

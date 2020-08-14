@@ -1,6 +1,4 @@
-package com.company.console;
-
-import com.company.domain.User;
+package com.company.domain;
 
 public class Session {
     private User user;

@@ -5,8 +5,11 @@ import com.company.domain.User;
 
 import java.util.Arrays;
 
+import static com.company.domain.Role.ADMIN;
+
 public class UserStorageImpl implements UserStorage {
     static User[] users = new User[50];
+
 
     @Override
     public boolean save(User user) {
@@ -22,7 +25,7 @@ public class UserStorageImpl implements UserStorage {
     @Override
     public String updateUserByLogin(String login, int id) {
         for (int i = 0; i < users.length; i++) {
-            if (users[i].getId()==id){
+            if (users[i].getId() == id) {
                 return users[i].getLogin();
             }
 
@@ -38,17 +41,17 @@ public class UserStorageImpl implements UserStorage {
             }
         }
 
-            return null;
+        return null;
     }
 
     @Override
     public String updateUserByName(String name, int id) {
-            for (int i = 0; i < users.length; i++) {
-                if (users[i].getId()==id){
-                    return users[i].getName();
-                }
-
+        for (int i = 0; i < users.length; i++) {
+            if (users[i].getId() == id) {
+                return users[i].getName();
             }
+
+        }
         return null;
     }
 
@@ -147,7 +150,7 @@ public class UserStorageImpl implements UserStorage {
     }
 
     @Override
-    public boolean contains(User user) {// тоже,что и ниже
+    public boolean contains(User user) {
         for (User value : users) {
             if (value == null) break;
             if (value.equals(user)) {
@@ -184,10 +187,10 @@ public class UserStorageImpl implements UserStorage {
     }
 
     @Override
-    public boolean checkUser(String login, String password) {
-        for (User user : users) {
-            if (user == null) break;
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)) {
+    public boolean contains(String login, String password) {
+        for (int i = 0; i < users.length; i++) {
+            if (users[i] == null) break;
+            if (users[i].getLogin().equals(login) && users[i].getPassword().equals(password)) {
                 return true;
             }
         }

@@ -6,14 +6,14 @@ public class UserValidator {
     }
 
     public static boolean validName(String name) {
-        return name.length() > 3;
+        return name.length() > 0;
     }
 
     public static boolean validPassword(String password) {
-        return password.length() > 3;
+        return password.length() > 0;
     }
 
     public static boolean validLogin(String name) {
-        return name.length() > 3;
+        return name.length() > 0;
     }
 }

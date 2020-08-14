@@ -1,8 +1,11 @@
 package com.company.service;
 
 import com.company.domain.User;
+import com.company.service.exception.ServiceException;
 import com.company.storage.UserStorage;
 import com.company.storage.UserStorageImpl;
+
+import static com.company.domain.Role.ADMIN;
 
 public class UserServiceImpl implements UserService {
     private UserStorage userStorage = new UserStorageImpl();
@@ -17,38 +20,31 @@ public class UserServiceImpl implements UserService {
     }
 
     // TODO: 12.08.2020 Создать UserNotFoundException и бросать его везде вместо null
-    // TODO: 12.08.2020 Реализовать меню пользователя и меню админаЛ
+    // TODO: 12.08.2020 Реализовать меню пользователя и меню админа
     @Override
-    public String updateUserByLogin(String login, int id) {
-        if (userStorage.contains(id)){
+    public String updateUserByLogin(String login, int id) throws ServiceException {
+        if (userStorage.contains(id)) {
             return userStorage.updateUserByLogin(login, id);
         }
-        return null;
+        throw new ServiceException("Could not find user with ID: " + id);
     }
 
     @Override
-    public String updateUserByPassword(String password, int id) {
-        if (userStorage.contains(id)){
+    public String updateUserByPassword(String password, int id) throws ServiceException {
+        if (userStorage.contains(id)) {
             return userStorage.updateUserByPassword(password, id);
         }
-        return null;
+        throw new ServiceException("Could not find user with ID: " + id);
     }
 
     @Override
-    public String updateUserByName(String name, int id) {
-        if (userStorage.contains(id)){
+    public String updateUserByName(String name, int id) throws ServiceException {
+        if (userStorage.contains(id)) {
             return updateUserByName(name, id);
         }
-        return null;
+        throw new ServiceException("Could not find user with ID: " + id);
     }
 
-//    @Override
-//    public User updateUser(User user, int id) {
-//        if (userStorage.contains(id)) {
-//            userStorage.updateUser(user, id);
-//        }
-//        return null;
-//    }
 
     @Override
     public void remove(int id) {
@@ -66,17 +62,26 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getById(int id) {
+    public User getById(int id) throws ServiceException {
         if (userStorage.contains(id)) {
             return userStorage.getById(id);
         }
-        return null;
+        throw new ServiceException("Could not find user with ID: " + id);
     }
 
     @Override
     public User getByLogin(String login) {
         if (userStorage.contains(login)) {
-            userStorage.getByLogin(login);
+            return userStorage.getByLogin(login);
+        }
+        return null;
+    }
+
+
+    @Override
+    public User checkUser(String login, String password) {
+        if (userStorage.contains(login, password)) {
+            return userStorage.getByLogin(login);
         }
         return null;
     }

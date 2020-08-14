@@ -3,17 +3,18 @@ package com.company.console.action;
 import com.company.console.ConsoleApplication;
 import com.company.console.util.Reader;
 import com.company.console.util.Writer;
-import com.company.console.validator.BookValidator;
+
 import com.company.console.validator.UserValidator;
-import com.company.domain.Author;
+
 import com.company.domain.User;
 import com.company.service.UserService;
 import com.company.service.UserServiceImpl;
-import com.company.storage.UserStorage;
-import com.company.storage.UserStorageImpl;
+import com.company.service.exception.ServiceException;
+
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Writer.*;
+import static com.company.domain.Role.USER;
 
 public class UserAction {
     private UserService userService = new UserServiceImpl();
@@ -32,13 +33,14 @@ public class UserAction {
             return;
         }
         User byLogin = userService.getByLogin(login);
-        if (byLogin == null){
+        if (byLogin == null) {
             writeString("User not found");
             return;
         }
-        if (byLogin.getPassword().equals(password)) {
-            ConsoleApplication.session.setUser(byLogin);
-            writeString("Hello " + byLogin.getName() + "! , " + "Authorization is successful");
+        User UserByPassword = userService.checkUser(login, password);
+        if (UserByPassword != null) {
+            writeString("Hello " + UserByPassword.getName() + "! , " + "Authorization is successful");
+            ConsoleApplication.session.setUser(UserByPassword);
         } else {
             writeString("Wrong password!");
         }
@@ -46,29 +48,31 @@ public class UserAction {
     }
 
 
-    public boolean reg() {
+    public void reg() {
         writeString("Enter login");
         String login = readString();
         if (!UserValidator.validLogin(login)) {
             writeString("Invalid login");
-            return false;
+            return;
         }
         writeString("Enter password");
         String password = readString();
         if (!UserValidator.validPassword(password)) {
             writeString("Invalid password");
-            return false;
+            return;
         }
         writeString("Enter name");
         String name = readString();
         if (!UserValidator.validName(name)) {
             writeString("Invalid name");
-            return false;
+            return;
         }
         User user = new User(login, password, name);
+        user.setRole(USER);
         userService.save(user);
-        writeString("User is already exist");
-        return false;
+        writeString("Registration is successful");
+        System.out.println(user);//////////////////////////////////
+
     }
 
     public void getAll() {
@@ -90,7 +94,11 @@ public class UserAction {
         if (!UserValidator.validLogin(login)) {
             writeString("Invalid login");
         }
-        userService.updateUserByLogin(login, id);
+        try {
+            userService.updateUserByLogin(login, id);
+        } catch (ServiceException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void updateUserByPassword() {
@@ -105,7 +113,11 @@ public class UserAction {
         if (!UserValidator.validPassword(password)) {
             writeString("Invalid password");
         }
-        userService.updateUserByPassword(password, id);
+        try {
+            userService.updateUserByPassword(password, id);
+        } catch (ServiceException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
@@ -121,7 +133,11 @@ public class UserAction {
         if (!UserValidator.validName(name)) {
             writeString("Invalid name");
         }
-        userService.updateUserByName(name, id);
+        try {
+            userService.updateUserByName(name, id);
+        } catch (ServiceException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
