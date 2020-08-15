@@ -1,5 +1,6 @@
 package com.company.console;
 
+import com.company.console.action.AddressAction;
 import com.company.console.action.AuthorAction;
 import com.company.console.action.BookAction;
 import com.company.console.action.UserAction;
@@ -16,6 +17,7 @@ public class ConsoleApplication {
     private BookAction bookAction = new BookAction();
     private AuthorAction authorAction = new AuthorAction();
     private UserAction userAction = new UserAction();
+    private AddressAction addressAction = new AddressAction();
 
 
     public void run() {
@@ -40,7 +42,8 @@ public class ConsoleApplication {
                 showUserMenu();
                 switch (readInt()) {
                     case 0:
-                        return;
+                        session = null;
+                        break;
                     case 1:
                         bookAction.getAll();
                         break;
@@ -60,7 +63,7 @@ public class ConsoleApplication {
                         showUpdateUserMenu();
                         switch (readInt()) {
                             case 0:
-                                return;
+                                continue;
                             case 1:
                                 userAction.updateUserByLogin();
                                 break;
@@ -85,12 +88,13 @@ public class ConsoleApplication {
                 showAdminMenu();
                 switch (readInt()) {
                     case 0:
-                        return;
+                        session = null;
+                        break;
                     case 1:
                         showModifyUserMenu();
                         switch (readInt()) {
                             case 0:
-                                return;
+                                continue;
                             case 1:
                                 userAction.updateUserByLogin();
                                 break;
@@ -122,7 +126,7 @@ public class ConsoleApplication {
                         showAuthorMenu();
                         switch (readInt()) {
                             case 0:
-                                return;
+                                continue;
                             case 1:
                                 authorAction.add();
                                 break;
@@ -151,7 +155,7 @@ public class ConsoleApplication {
                         showBookMenu();
                         switch (readInt()) {
                             case 0:
-                                return;
+                                continue;
                             case 1:
                                 bookAction.add();
                                 break;
@@ -190,15 +194,88 @@ public class ConsoleApplication {
                                 break;
                             default:
                                 writeString("Operation not found");
-
+                                continue;
+                        }
+                    case 4:
+                        showAddressMenu();
+                        switch (readInt()) {
+                            case 0:
+                                continue;
+                            case 1:
+                                addressAction.add();
+                                break;
+                            case 2:
+                                addressAction.updateHomeById();
+                                break;
+                            case 3:
+                                addressAction.updateStreetById();
+                                break;
+                            case 4:
+                                addressAction.removeByID();
+                                break;
+                            case 5:
+                                addressAction.remove();
+                                break;
+                            case 6:
+                                authorAction.getById();
+                                break;
+                            case 7:
+                                addressAction.getAll();
+                                break;
+                            case 8:
+                                addressAction.getALLByHome();
+                                break;
+                            case 9:
+                                addressAction.getALLByStreet();
+                                break;
+                            default:
+                                writeString("Operation not found");
+                                continue;
                         }
                 }
             }
         }
     }
 
-    private void showModifyUserMenu() {
+    private void showRegMenu() {
+        System.err.println("Bookstore Main Menu");
         writeString("0  - Exit");
+        writeString("1  - Registration");
+        writeString("2  - Authorization");
+    }
+
+    private void showUserMenu() {
+        writeString("!!!!!USER MENU!!!!!");
+        writeString("0  - Logout");
+        writeString("1  - Find all books");
+        writeString("2  - Find book by title");
+        writeString("3  - Find all books by author");
+        writeString("4  - Find all books by id");
+        writeString("5  - Find all books by price");
+        writeString("6  - Show menu update user ");
+    }
+
+    private void showUpdateUserMenu() {
+        System.err.println("Update User Menu");
+        writeString("0  - Back");
+        writeString("1  - Update login by id");
+        writeString("2  - Update password by id");
+        writeString("3  - Update name by id");
+    }
+
+    private void showAdminMenu() {
+        writeString("!!!!!ADMIN MENU!!!!!");
+        writeString("0  - Logout");
+        writeString("1  - showModifyUserMenu");
+        writeString("2  - showAuthorMenu");
+        writeString("3  - showBookMenu");
+        writeString("4  - showAddressMenu");
+
+    }
+
+    private void showModifyUserMenu() {
+        System.err.println("Modify User Menu");
+        writeString("0  - Back");
         writeString("1  - Update user by Login");
         writeString("2  - Update user by Login");
         writeString("3  - Update user by Login");
@@ -208,15 +285,19 @@ public class ConsoleApplication {
         writeString("8  - Remove user by ID");
     }
 
-
-    private void showAdminMenu() {
+    private void showAuthorMenu() {
+        System.err.println("Author Menu");
         writeString("0  - Back");
-        writeString("1  - showModifyUserMenu");
-        writeString("2  - showAuthorMenu");
-        writeString("3  - showBookMenu");
+        writeString("1  - Create");
+        writeString("2  - Update author");
+        writeString("3  - Remove by id");
+        writeString("4  - Remove");
+        writeString("5  - Get by id");
+        writeString("6  - Get all");
     }
 
     private void showBookMenu() {
+        System.err.println("Book Menu");
         writeString("0  - Back");
         writeString("1  - Create");
         writeString("2  - Update title by id");
@@ -232,36 +313,18 @@ public class ConsoleApplication {
         writeString("12 - Get all by title");
     }
 
-
-    private void showAuthorMenu() {
+    private void showAddressMenu() {
+        System.err.println("Address Menu");
         writeString("0  - Back");
         writeString("1  - Create");
-        writeString("2  - Update author");
-        writeString("3  - Remove by id");
-        writeString("4  - Remove");
-        writeString("5  - Get by id");
-        writeString("6  - Get all");
-    }
-
-    private void showRegMenu() {
-        writeString("0  - Exit");
-        writeString("1  - Registration");
-        writeString("2  - Authorization");
-    }
-
-    private void showUserMenu() {
-        writeString("0  - Exit");
-        writeString("1  - Find all books");
-        writeString("2  - Find book by title");
-        writeString("3  - Find all books by author");
-        writeString("4  - Find all books by id");
-        writeString("5  - Find all books by price");
-    }
-
-    private void showUpdateUserMenu() {
-        writeString("1  - Update login by id");
-        writeString("2  - Update password by id");
-        writeString("3  - Update name by id");
+        writeString("2  - Update home by id");
+        writeString("3  - Update street by id");
+        writeString("4  - Remove by id");
+        writeString("5  - Remove");
+        writeString("6  - Get by id");
+        writeString("7  - Get all");
+        writeString("8  - Get all by home");
+        writeString("9  - Get all by street");
     }
 
 
