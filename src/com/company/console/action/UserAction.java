@@ -6,10 +6,11 @@ import com.company.console.util.Writer;
 
 import com.company.console.validator.UserValidator;
 
+import com.company.domain.Session;
 import com.company.domain.User;
 import com.company.service.UserService;
 import com.company.service.UserServiceImpl;
-import com.company.service.exception.ServiceException;
+import com.company.service.exception.UserException;
 
 
 import static com.company.console.util.Reader.*;
@@ -37,10 +38,10 @@ public class UserAction {
             writeString("User not found");
             return;
         }
-        User UserByPassword = userService.checkUser(login, password);
-        if (UserByPassword != null) {
-            writeString("Hello " + UserByPassword.getName() + "! , " + "Authorization is successful");
-            ConsoleApplication.session.setUser(UserByPassword);
+        User userByPassword = userService.checkUser(login, password);
+        if (userByPassword != null) {
+            writeString("Hello " + userByPassword.getName() + "! , " + "Authorization is successful");
+            ConsoleApplication.session = new Session(userByPassword);
         } else {
             writeString("Wrong password!");
         }
@@ -96,7 +97,7 @@ public class UserAction {
         }
         try {
             userService.updateUserByLogin(login, id);
-        } catch (ServiceException e) {
+        } catch (UserException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -115,7 +116,7 @@ public class UserAction {
         }
         try {
             userService.updateUserByPassword(password, id);
-        } catch (ServiceException e) {
+        } catch (UserException e) {
             System.err.println(e.getMessage());
         }
 
@@ -135,7 +136,7 @@ public class UserAction {
         }
         try {
             userService.updateUserByName(name, id);
-        } catch (ServiceException e) {
+        } catch (UserException e) {
             System.err.println(e.getMessage());
         }
 

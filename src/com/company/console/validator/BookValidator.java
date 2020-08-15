@@ -1,6 +1,11 @@
 package com.company.console.validator;
 
-public class BookValidator {
+public final class BookValidator {
+
+    private BookValidator(){
+        throw new RuntimeException();
+    }
+
     public static boolean validId(int id) {
         return id > 0;
     }

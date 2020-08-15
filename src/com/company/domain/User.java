@@ -10,7 +10,7 @@ public class User {
     private String name;
     private Role role;
 
-    public  User(){
+    public User(){
     }
 
     public User(String login, String password, String name) {

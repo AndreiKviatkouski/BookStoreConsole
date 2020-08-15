@@ -1,15 +1,21 @@
 package com.company.storage;
 
 import com.company.console.util.Writer;
+import com.company.domain.Role;
 import com.company.domain.User;
 
 import java.util.Arrays;
 
 import static com.company.domain.Role.ADMIN;
+import static com.company.domain.Role.USER;
 
 public class UserStorageImpl implements UserStorage {
-    static User[] users = new User[50];
+    private static User[] users = new User[50];
 
+    static {
+        users[0] = new User(1, "admin", "admin", "Admin", ADMIN);
+        users[1] = new User(2, "user", "user", "User", USER);
+    }
 
     @Override
     public boolean save(User user) {
