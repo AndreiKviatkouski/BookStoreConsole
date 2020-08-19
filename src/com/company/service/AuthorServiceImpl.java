@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.domain.Author;
+import com.company.service.exception.AuthorException;
 import com.company.storage.AuthorStorage;
 import com.company.storage.AuthorStorageImpl;
 
@@ -17,11 +18,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author updateAuthor(Author author, int id) {
+    public Author updateAuthor(Author author, int id) throws AuthorException {
         if (authorStorage.contains(id)) {
             return authorStorage.updateAuthor(author, id);
         }
-        return null;
+        throw new AuthorException("Could not find author with ID: " + id);
     }
 
     @Override
@@ -41,11 +42,11 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Override
-    public Author getById(int id) {
+    public Author getById(int id) throws AuthorException {
         if (authorStorage.contains(id)) {
             return authorStorage.getById(id);
         }
-        return null;
+        throw new AuthorException("Could not find ID: " + id);
     }
 
     @Override

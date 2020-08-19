@@ -1,6 +1,7 @@
 package com.company.service;
 
 import com.company.domain.Address;
+import com.company.service.exception.AddressException;
 import com.company.storage.AddressStorage;
 import com.company.storage.AddressStorageImpl;
 
@@ -17,19 +18,19 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public int updateHomeById(int home, int id) {
+    public int updateHomeById(int home, int id) throws AddressException {
         if (addressStorage.contains(id)) {
             return addressStorage.updateHomeById(home, id);
         }
-        return -1;
+        throw new AddressException("Could not find home with ID: " + id);
     }
 
     @Override
-    public String updateStreetById(String street, int id) {
+    public String updateStreetById(String street, int id) throws AddressException {
         if (addressStorage.contains(id)) {
             return addressStorage.updateStreetById(street, id);
         }
-        return null;
+        throw new AddressException("Could not find street with ID: " + id);
     }
 
     @Override
@@ -49,11 +50,11 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public Address getById(int id) {
+    public Address getById(int id) throws AddressException {
         if (addressStorage.contains(id)) {
             addressStorage.getById(id);
         }
-        return null;
+        throw new AddressException("Could not find ID: " + id);
     }
 
     @Override
@@ -63,19 +64,19 @@ public class AddressServiceImpl implements AddressService {
 
 
     @Override
-    public Address[] getAllByHome(int home) {
+    public Address[] getAllByHome(int home) throws AddressException {
        if (addressStorage.contains(home)){
            return addressStorage.getAllByHome(home);
        }
-       return null;
+        throw new AddressException("Could not find home: " + home);
     }
 
     @Override
-    public Address[] getAllByStreet(String street) {
+    public Address[] getAllByStreet(String street) throws AddressException {
         if (addressStorage.contains(street)) {
             return addressStorage.getAllByStreet(street);
         }
-       return null;
+        throw new AddressException("Could not find street: " + street);
     }
 }
 

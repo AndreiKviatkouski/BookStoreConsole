@@ -2,6 +2,7 @@ package com.company.service;
 
 import com.company.domain.Author;
 import com.company.domain.Book;
+import com.company.service.exception.BookException;
 import com.company.storage.BookStorage;
 import com.company.storage.BookStorageImpl;
 
@@ -21,35 +22,35 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public String updateTitleById(String title, int id) {
+    public String updateTitleById(String title, int id) throws BookException {
         if (bookStorage.contains(id)) {
             return bookStorage.updateTitleById(title, id);
         }
-        return null;
+        throw new BookException("Could not find title with ID: " + id);
     }
 
     @Override
-    public Author updateAuthor(Author author, int id) {
+    public Author updateAuthor(Author author, int id) throws BookException {
         if (bookStorage.contains(id)) {
             return bookStorage.updateAuthor(author, id);
         }
-        return null;
+        throw new BookException("Could not find author with ID: " + id);
     }
 
     @Override
-    public BigDecimal updatePrice(BigDecimal price, int id) {
+    public BigDecimal updatePrice(BigDecimal price, int id) throws BookException {
         if (bookStorage.contains(id)) {
             return bookStorage.updatePrice(price, id);
         }
-        return null;
+        throw new BookException("Could not find price with ID: " + id);
     }
 
     @Override
-    public String updateDescription(String desc, int id) {
+    public String updateDescription(String desc, int id) throws BookException {
         if (bookStorage.contains(id)) {
             return bookStorage.updateDescription(desc, id);
         }
-        return null;
+        throw new BookException("Could not find description with ID: " + id);
     }
 
     @Override
@@ -68,11 +69,11 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getById(int id) {
+    public Book getById(int id) throws BookException {
         if (bookStorage.contains(id)) {
             return bookStorage.getById(id);
         }
-        return null;
+        throw new BookException("Could not find ID: " + id);
     }
 
     @Override
@@ -91,10 +92,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public Book getByTitle(String title) {
+    public Book getByTitle(String title) throws BookException {
         if (bookStorage.contains(title)){
             return bookStorage.getByTitle(title);
         }
-      return null;
+        throw new BookException("Could not find Title: " + title);
     }
 }

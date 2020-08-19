@@ -119,7 +119,7 @@ public class ConsoleApplication {
 
                             default:
                                 writeString("Operation not found");
-                                continue;
+                               continue;
                         }
 
                     case 2:

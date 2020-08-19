@@ -4,6 +4,7 @@ import com.company.console.validator.AddressValidator;
 import com.company.domain.Address;
 import com.company.service.AddressService;
 import com.company.service.AddressServiceImpl;
+import com.company.service.exception.AddressException;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Writer.*;
@@ -42,8 +43,12 @@ public class AddressAction {
             writeString("Invalid number home: " + home);
             return;
         }
-        addressService.updateHomeById(id, home);
-        writeString("Home number was updated:" + home);
+        try {
+            addressService.updateHomeById(id, home);
+            writeString("Home number was updated:" + home);
+        } catch (AddressException e) {
+            System.err.println(e.getMessage());
+        }
 
     }
 
@@ -60,8 +65,12 @@ public class AddressAction {
             writeString("Invalid street:" + street);
             return;
         }
-        addressService.updateStreetById(street, id);
-        writeString("Street was added: " + street);
+        try {
+            addressService.updateStreetById(street, id);
+            writeString("Street was added: " + street);
+        } catch (AddressException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void removeByID() {
@@ -71,8 +80,12 @@ public class AddressAction {
             writeString("Invalid id: " + id);
             return;
         }
-        addressService.remove(id);
-        writeString("Address was deleted: " + addressService.getById(id));
+        try {
+            addressService.remove(id);
+            writeString("Address was deleted: " + addressService.getById(id));
+        } catch (AddressException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void remove() {
@@ -94,9 +107,12 @@ public class AddressAction {
             writeString("Invalid id: " + id);
             return;
         }
-        addressService.getById(id);
-        writeString("Your finding address is: " + addressService.getById(id));
-
+        try {
+            addressService.getById(id);
+            writeString("Your finding address is: " + addressService.getById(id));
+        } catch (AddressException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void getAll() {

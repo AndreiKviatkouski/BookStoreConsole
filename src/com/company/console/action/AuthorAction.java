@@ -5,6 +5,8 @@ import com.company.console.validator.BookValidator;
 import com.company.domain.Author;
 import com.company.service.AuthorService;
 import com.company.service.AuthorServiceImpl;
+import com.company.service.exception.AddressException;
+import com.company.service.exception.AuthorException;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Reader.readString;
@@ -41,7 +43,11 @@ public class AuthorAction {
             writeString("Invalid id");
             return;
         }
-        authorService.updateAuthor(author, id);
+        try {
+            authorService.updateAuthor(author, id);
+        }catch (AuthorException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public void removeById() {
@@ -71,8 +77,12 @@ public class AuthorAction {
             writeString("Invalid id");
             return;
         }
-        Author byId = authorService.getById(id);
-        writeString(byId.getFullName());
+        try {
+            Author byId = authorService.getById(id);
+            writeString(byId.getFullName());
+        }catch (AuthorException e){
+            System.err.println(e.getMessage());
+        }
     }
 
     public void getAll() {

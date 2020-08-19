@@ -7,6 +7,8 @@ import com.company.service.AuthorService;
 import com.company.service.AuthorServiceImpl;
 import com.company.service.BookService;
 import com.company.service.BookServiceImpl;
+import com.company.service.exception.BookException;
+import com.company.service.exception.UserException;
 
 import java.math.BigDecimal;
 
@@ -20,14 +22,14 @@ public class BookAction {
     public void add() {
         writeString("Enter title");
         String title = readString();
-        if (!BookValidator.validTitle(title)){
+        if (!BookValidator.validTitle(title)) {
             writeString("Invalid title!");
             return;
         }
 
         writeString("Enter description");
         String desc = readString();
-        if (!BookValidator.validDescription(desc)){
+        if (!BookValidator.validDescription(desc)) {
             writeString("Invalid description");
             return;
         }
@@ -42,7 +44,7 @@ public class BookAction {
 
         writeString("Enter price");
         double price = readDouble();
-        if (!BookValidator.validPrice(price)){
+        if (!BookValidator.validPrice(price)) {
             writeString("Invalid price");
             return;
         }
@@ -53,17 +55,23 @@ public class BookAction {
     public void updateTitleById() {
         writeString("Enter title");
         String title = readString();
-        if (!BookValidator.validTitle(title)){
+        if (!BookValidator.validTitle(title)) {
             writeString("Invalid title");
             return;
         }
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
-        bookService.updateTitleById(title, id);
+        try {
+            bookService.updateTitleById(title, id);
+        } catch (UserException e) {
+            System.err.println(e.getMessage());
+        } catch (BookException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void updateAuthor() {
@@ -77,51 +85,63 @@ public class BookAction {
 
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
-        bookService.updateAuthor(author, id);
+        try {
+            bookService.updateAuthor(author, id);
+        } catch (BookException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     public void updatePrice() {
         writeString("Enter price");
         double price = readDouble();
-        if (!BookValidator.validPrice(price)){
+        if (!BookValidator.validPrice(price)) {
             writeString("Invalid price");
             return;
         }
 
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
-        bookService.updatePrice(new BigDecimal(price), id);
+       try {
+           bookService.updatePrice(new BigDecimal(price), id);
+       }catch (BookException e){
+           System.err.println(e.getMessage());
+       }
     }
 
     public void updateDescription() {
         writeString("Enter Description");
         String description = readString();
-        if (!BookValidator.validDescription(description)){
+        if (!BookValidator.validDescription(description)) {
             writeString("Invalid description");
             return;
         }
 
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
-        bookService.updateDescription(description, id);
+       try {
+           bookService.updateDescription(description, id);
+       }catch (BookException e){
+           System.err.println(e.getMessage());
+       }
     }
 
     public void removeById() {
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
@@ -141,14 +161,17 @@ public class BookAction {
     public void getById() {
         writeString("Enter id");
         int id = readInt();
-        if (!BookValidator.validId(id)){
+        if (!BookValidator.validId(id)) {
             writeString("Invalid id");
             return;
         }
-        Book byId = bookService.getById(id);
-        writeString(byId.getTitle() + " " + byId.getAuthor());
+        try {
+            Book byId = bookService.getById(id);
+            writeString(byId.getTitle() + " " + byId.getAuthor());
+        }catch (BookException e){
+            System.err.println(e.getMessage());
+        }
     }
-
     public void getAll() {
         Book[] all = bookService.getAll();
         for (int i = 0; i < all.length; i++) {
@@ -159,7 +182,7 @@ public class BookAction {
     public void getAllByPrice() {
         writeString("Enter price");
         double price = readDouble();
-        if (!BookValidator.validPrice(price)){
+        if (!BookValidator.validPrice(price)) {
             writeString("Invalid price");
             return;
         }
@@ -172,7 +195,7 @@ public class BookAction {
     public void getAllByAuthor() {
         writeString("Enter author");
         String author = readString();
-        if (!BookValidator.validAuthor(author)){
+        if (!BookValidator.validAuthor(author)) {
             writeString("Invalid author");
             return;
         }
@@ -185,12 +208,16 @@ public class BookAction {
     public void getByTitle() {
         writeString("Enter title");
         String title = readString();
-        if (!BookValidator.validTitle(title)){
+        if (!BookValidator.validTitle(title)) {
             writeString("Invalid title");
             return;
         }
-        Book all = bookService.getByTitle(title);
-        writeString(all.getTitle());
+        try {
+            Book all = bookService.getByTitle(title);
+            writeString(all.getTitle());
+        }catch (BookException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
 
