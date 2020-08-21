@@ -1,15 +1,19 @@
 package com.company.storage;
 
-import com.company.console.util.Writer;
 import com.company.domain.Author;
 import com.company.domain.Book;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
 
+
 public class BookStorageImpl implements BookStorage {
     private static Book[] books = new Book[50];
+    private static AuthorStorage authorStorage = new AuthorStorageImpl();
 
+    static {
+        books[0] = new Book(1, "JAVA 8", "Java programming methods",BigDecimal.valueOf(10.12), authorStorage.getById(1));
+    }
 
     @Override
     public boolean save(Book book) {
@@ -136,7 +140,7 @@ public class BookStorageImpl implements BookStorage {
     public Book[] getAllByAuthor(String author) {//
         int count = 0;
         for (Book book : books) {
-            if (book.getAuthor().equals(author)){
+            if (book.getAuthor().equals(author)) {
                 count++;
                 return Arrays.copyOf(books, count);
             }

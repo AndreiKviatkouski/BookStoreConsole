@@ -37,14 +37,14 @@ public class AuthorAction {
         int i = readInt() - 1;
         Author author = all[i];
 
-        writeString("Enter id");
-        int id = readInt();
-        if (!BookValidator.validId(id)) {
-            writeString("Invalid id");
+        writeString("Enter new name");
+        String name = readString();
+        if (!AuthorValidator.validFullName(name)) {
+            writeString("Invalid number");
             return;
         }
         try {
-            authorService.updateAuthor(author, id);
+            authorService.updateAuthor(author, i);
         }catch (AuthorException e){
             System.err.println(e.getMessage());
         }

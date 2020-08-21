@@ -6,6 +6,9 @@ import java.util.Arrays;
 
 public class AuthorStorageImpl implements AuthorStorage {
     private static Author[] authors = new Author[50];
+    static {
+        authors[0]=new Author(1,"Blinov");
+    }
 
     @Override
     public boolean save(Author author) {

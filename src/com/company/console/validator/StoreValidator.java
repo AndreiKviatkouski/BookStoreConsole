@@ -1,19 +1,16 @@
 package com.company.console.validator;
 
-public class AddressValidator {
+public class StoreValidator {
     public static boolean validStreet(String street) {
         return street.length() > 3;
     }
 
-    public static boolean validHome(int home) {
-        return home > 0;
+    public static boolean validTitle(String title) {
+        return title.length() > 0;
     }
 
     public static boolean validId(int id) {
         return id > 0;
     }
 
-    public static boolean validStreet(int street) {
-        return street > 0;
-    }
 }

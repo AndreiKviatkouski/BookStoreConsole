@@ -1,6 +1,7 @@
 package com.company.domain;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Objects;
 
 public class Book {
@@ -12,7 +13,7 @@ public class Book {
     private Author author;
 
 //    public static void main(String[] args) {
-//        BigDecimal bigDecimal = new BigDecimal(22.56654);
+//        BigDecimal bigDecimal = new BigDecimal(22.56);
 //        bigDecimal.setScale(2, RoundingMode.DOWN);
 //        System.out.println(bigDecimal.doubleValue());
 //    }

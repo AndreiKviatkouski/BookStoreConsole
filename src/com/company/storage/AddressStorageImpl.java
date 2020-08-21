@@ -7,6 +7,9 @@ import java.util.Arrays;
 
 public class AddressStorageImpl implements AddressStorage {
     private static Address[] addresses = new Address[50];
+    static {
+        addresses[0]=new Address("Nezavisimosti", 10);
+    }
 
     @Override
     public boolean save(Address address) {

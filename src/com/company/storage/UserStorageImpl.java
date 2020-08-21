@@ -61,19 +61,6 @@ public class UserStorageImpl implements UserStorage {
         return null;
     }
 
-//    @Override
-//    public User updateUser(User user, int id) {
-//        for (int i = 0; i < users.length; i++) {
-//            if (users[i] == null) {
-//                Writer.writeString("Users list is empty");
-//            }
-//            if (users[i].getId() == id) {
-//                users[i] = user;
-//                return user;
-//            }
-//        }
-//        return null;
-//    }
 
     @Override
     public void remove(int id) {

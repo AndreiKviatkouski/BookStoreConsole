@@ -1,14 +1,11 @@
 package com.company.console;
 
-import com.company.console.action.AddressAction;
-import com.company.console.action.AuthorAction;
-import com.company.console.action.BookAction;
-import com.company.console.action.UserAction;
+import com.company.console.action.*;
 import com.company.domain.Role;
 import com.company.domain.Session;
 
-import static com.company.console.util.Reader.*;
-import static com.company.console.util.Writer.*;
+import static com.company.console.util.Reader.readInt;
+import static com.company.console.util.Writer.writeString;
 
 public class ConsoleApplication {
 
@@ -18,6 +15,7 @@ public class ConsoleApplication {
     private AuthorAction authorAction = new AuthorAction();
     private UserAction userAction = new UserAction();
     private AddressAction addressAction = new AddressAction();
+    private StoreAction storeAction = new StoreAction();
 
 
     public void run() {
@@ -119,7 +117,7 @@ public class ConsoleApplication {
 
                             default:
                                 writeString("Operation not found");
-                               continue;
+                                continue;
                         }
 
                     case 2:
@@ -232,6 +230,40 @@ public class ConsoleApplication {
                                 writeString("Operation not found");
                                 continue;
                         }
+                    case 5:
+                        showStoreMenu();
+                        switch (readInt()) {
+                            case 0:
+                                continue;
+                            case 1:
+                                storeAction.save();
+                                break;
+                            case 2:
+                                storeAction.updateTitleById();
+                                break;
+                            case 3:
+                                storeAction.updateAddressById();
+                                break;
+                            case 4:
+                               storeAction.deleteById();
+                                break;
+                            case 5:
+                                storeAction.deleteStore();
+                                break;
+                            case 6:
+                                storeAction.getById();
+                                break;
+                            case 7:
+                                storeAction.getAll();
+                                break;
+                            case 8:
+                                storeAction.getByTitle();
+                                break;
+
+                            default:
+                                writeString("Operation not found");
+                                continue;
+                        }
                 }
             }
         }
@@ -264,17 +296,18 @@ public class ConsoleApplication {
     }
 
     private void showAdminMenu() {
-        writeString("!!!!!ADMIN MENU!!!!!");
+        writeString("***ADMIN MENU***");
         writeString("0  - Logout");
         writeString("1  - showModifyUserMenu");
         writeString("2  - showAuthorMenu");
         writeString("3  - showBookMenu");
         writeString("4  - showAddressMenu");
+        writeString("5  - showStoreMenu");
 
     }
 
     private void showModifyUserMenu() {
-        System.err.println("Modify User Menu");
+        writeString("***Modify User Menu***");
         writeString("0  - Back");
         writeString("1  - Update user by Login");
         writeString("2  - Update user by Login");
@@ -286,7 +319,7 @@ public class ConsoleApplication {
     }
 
     private void showAuthorMenu() {
-        System.err.println("Author Menu");
+        writeString("***Author Menu***");
         writeString("0  - Back");
         writeString("1  - Create");
         writeString("2  - Update author");
@@ -297,7 +330,7 @@ public class ConsoleApplication {
     }
 
     private void showBookMenu() {
-        System.err.println("Book Menu");
+        writeString("***Book Menu***");
         writeString("0  - Back");
         writeString("1  - Create");
         writeString("2  - Update title by id");
@@ -314,7 +347,7 @@ public class ConsoleApplication {
     }
 
     private void showAddressMenu() {
-        System.err.println("Address Menu");
+        writeString("***Address Menu***");
         writeString("0  - Back");
         writeString("1  - Create");
         writeString("2  - Update home by id");
@@ -325,6 +358,19 @@ public class ConsoleApplication {
         writeString("7  - Get all");
         writeString("8  - Get all by home");
         writeString("9  - Get all by street");
+    }
+
+    private void showStoreMenu() {
+        writeString("***Store Menu***");
+        writeString("0  - Back");
+        writeString("1  - Create");
+        writeString("2  - Update by title");
+        writeString("3  - Update by address");
+        writeString("4  - Remove by id");
+        writeString("5  - Remove");
+        writeString("6  - Get by id");
+        writeString("7  - Get all");
+        writeString("8  - Get by title");
     }
 
 

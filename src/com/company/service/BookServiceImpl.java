@@ -6,11 +6,11 @@ import com.company.service.exception.BookException;
 import com.company.storage.BookStorage;
 import com.company.storage.BookStorageImpl;
 
+
 import java.math.BigDecimal;
 
 public class BookServiceImpl implements BookService {
-
-    private BookStorage bookStorage = new BookStorageImpl();
+  private BookStorage bookStorage = new BookStorageImpl();
 
     @Override
     public boolean save(Book book) {
