@@ -1,4 +1,4 @@
-package com.company.storage.exception;
+package com.company.console.exception;
 
 public class StorageException extends Exception {
     public StorageException() {
