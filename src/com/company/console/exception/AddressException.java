@@ -1,4 +1,4 @@
-package com.company.service.exception;
+package com.company.console.exception;
 
 public class AddressException extends Exception{
     public AddressException() {

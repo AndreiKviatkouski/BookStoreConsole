@@ -2,8 +2,8 @@ package com.company.service;
 
 import com.company.domain.Author;
 import com.company.domain.Book;
-import com.company.service.exception.BookException;
-import com.company.service.exception.UserException;
+import com.company.console.exception.BookException;
+import com.company.console.exception.UserException;
 
 import java.math.BigDecimal;
 

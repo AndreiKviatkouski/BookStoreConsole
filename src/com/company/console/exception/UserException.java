@@ -1,4 +1,4 @@
-package com.company.service.exception;
+package com.company.console.exception;
 
 public class UserException extends Exception {
     public UserException() {

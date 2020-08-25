@@ -7,8 +7,8 @@ import com.company.service.AuthorService;
 import com.company.service.AuthorServiceImpl;
 import com.company.service.BookService;
 import com.company.service.BookServiceImpl;
-import com.company.service.exception.BookException;
-import com.company.service.exception.UserException;
+import com.company.console.exception.BookException;
+import com.company.console.exception.UserException;
 
 import java.math.BigDecimal;
 

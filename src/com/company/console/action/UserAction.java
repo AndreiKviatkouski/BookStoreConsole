@@ -6,11 +6,11 @@ import com.company.console.util.Writer;
 
 import com.company.console.validator.UserValidator;
 
-import com.company.domain.Session;
+import com.company.session.Session;
 import com.company.domain.User;
 import com.company.service.UserService;
 import com.company.service.UserServiceImpl;
-import com.company.service.exception.UserException;
+import com.company.console.exception.UserException;
 
 
 import static com.company.console.util.Reader.*;

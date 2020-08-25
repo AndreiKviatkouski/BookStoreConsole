@@ -2,6 +2,7 @@ package com.company.console.exception;
 
 public class StorageException extends Exception {
     public StorageException() {
+        super();
     }
 
     public StorageException(String message) {
@@ -16,7 +17,7 @@ public class StorageException extends Exception {
         super(cause);
     }
 
-    public StorageException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    protected StorageException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

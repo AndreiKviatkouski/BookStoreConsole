@@ -23,10 +23,10 @@ public class AuthorStorageImpl implements AuthorStorage {
 
     @Override
     public Author updateAuthor(Author author, int id) {
-        for (int i = 0; i < authors.length; i++) {
-            if (authors[i].getId() == id) {
-                Author oldAuthor = authors[i];
-                authors[i].setFullName(author.getFullName());
+        for (Author value : authors) {
+            if (value.getId() == id) {
+                Author oldAuthor = value;
+                value.setFullName(author.getFullName());
                 return oldAuthor;
             }
 

@@ -2,7 +2,7 @@ package com.company.console;
 
 import com.company.console.action.*;
 import com.company.domain.Role;
-import com.company.domain.Session;
+import com.company.session.Session;
 
 import static com.company.console.util.Reader.readInt;
 import static com.company.console.util.Writer.writeString;

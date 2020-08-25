@@ -1,4 +1,6 @@
-package com.company.domain;
+package com.company.session;
+
+import com.company.domain.User;
 
 public class Session {
     private User user;

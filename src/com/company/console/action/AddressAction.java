@@ -4,7 +4,7 @@ import com.company.console.validator.AddressValidator;
 import com.company.domain.Address;
 import com.company.service.AddressService;
 import com.company.service.AddressServiceImpl;
-import com.company.service.exception.AddressException;
+import com.company.console.exception.AddressException;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Writer.*;

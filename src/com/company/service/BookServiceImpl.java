@@ -2,7 +2,7 @@ package com.company.service;
 
 import com.company.domain.Author;
 import com.company.domain.Book;
-import com.company.service.exception.BookException;
+import com.company.console.exception.BookException;
 import com.company.storage.BookStorage;
 import com.company.storage.BookStorageImpl;
 

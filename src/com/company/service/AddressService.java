@@ -1,7 +1,7 @@
 package com.company.service;
 
 import com.company.domain.Address;
-import com.company.service.exception.AddressException;
+import com.company.console.exception.AddressException;
 
 public interface AddressService {
     // TODO: 15.08.2020 Реализовать impl AddressAction

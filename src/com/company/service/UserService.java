@@ -1,7 +1,7 @@
 package com.company.service;
 
 import com.company.domain.User;
-import com.company.service.exception.UserException;
+import com.company.console.exception.UserException;
 
 public interface UserService {
     boolean save(User user);

@@ -1,7 +1,7 @@
 package com.company.service;
 
 import com.company.domain.Author;
-import com.company.service.exception.AuthorException;
+import com.company.console.exception.AuthorException;
 
 
 public interface AuthorService {

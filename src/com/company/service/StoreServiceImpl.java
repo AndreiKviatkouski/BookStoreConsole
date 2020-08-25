@@ -2,7 +2,7 @@ package com.company.service;
 
 import com.company.domain.Address;
 import com.company.domain.Store;
-import com.company.service.exception.StorageException;
+import com.company.console.exception.StorageException;
 import com.company.storage.StoreStorage;
 import com.company.storage.StoreStorageImpl;
 

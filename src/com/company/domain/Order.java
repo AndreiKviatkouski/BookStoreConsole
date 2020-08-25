@@ -128,17 +128,5 @@ public class Order {
         return result;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "id=" + id +
-                ", user=" + user +
-                ", address=" + address +
-                ", store=" + store +
-                ", status=" + status +
-                ", type=" + type +
-                ", books=" + Arrays.toString(books) +
-                ", totalPrice=" + totalPrice +
-                '}';
-    }
+
 }

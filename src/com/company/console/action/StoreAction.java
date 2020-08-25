@@ -6,7 +6,7 @@ import com.company.domain.Address;
 import com.company.domain.Store;
 import com.company.service.StoreService;
 import com.company.service.StoreServiceImpl;
-import com.company.service.exception.StorageException;
+import com.company.console.exception.StorageException;
 
 import static com.company.console.util.Reader.readInt;
 import static com.company.console.util.Reader.readString;

@@ -4,10 +4,22 @@ import com.company.domain.Order;
 import com.company.domain.Store;
 import com.company.domain.User;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
+
+import static com.company.domain.Status.ACTIVE;
+import static com.company.domain.Type.PICKUP;
 
 public class OrderStorageImpl implements OrderStorage {
     private static Order[] orders = new Order[50];
+    private static UserStorage userStorage = new UserStorageImpl();
+    private static StoreStorage storeStorage = new StoreStorageImpl();
+    private static BookStorage bookStorage = new BookStorageImpl();
+    private static AddressStorage addressStorage = new AddressStorageImpl();
+
+    static {
+        orders[0]= new Order(1,userStorage.getById(1),addressStorage.getById(1),storeStorage.get(1),ACTIVE,PICKUP,bookStorage.getAll(),bookStorage.getById(1).getPrice());
+    }
 
     // TODO: 23.08.2020 Реализовать OrderStorage
     // TODO: 23.08.2020 Реализовать OrderService
@@ -138,22 +150,6 @@ public class OrderStorageImpl implements OrderStorage {
         }
         return Arrays.copyOf(orders, count);
     }
-
-    public Order[] getAllByStore2(Store store) {
-        int count = 0;
-        for (Order order : orders) {
-            if (order.getStore().equals(store)) {
-                count++;
-            }
-        }
-        Order[] orderOld = new Order[count];
-        for (int i = 0; i < orderOld.length - 1; i++) {
-            orderOld[i] = orders[i + 1];
-
-        }
-        return orderOld;
-    }
-
 
     @Override
     public boolean contains(Order order) {

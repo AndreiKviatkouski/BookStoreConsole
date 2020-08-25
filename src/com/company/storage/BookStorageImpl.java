@@ -13,6 +13,8 @@ public class BookStorageImpl implements BookStorage {
 
     static {
         books[0] = new Book(1, "JAVA 8", "Java programming methods",BigDecimal.valueOf(10.12), authorStorage.getById(1));
+        books[1] = new Book(2, "JAVA 9", "Java programming methods",BigDecimal.valueOf(12.12), authorStorage.getById(1));
+        books[2] = new Book(3, "JAVA 14", "Java programming methods",BigDecimal.valueOf(14.12), authorStorage.getById(1));
     }
 
     @Override
@@ -28,10 +30,10 @@ public class BookStorageImpl implements BookStorage {
 
     @Override
     public String updateTitleById(String title, int id) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getId() == id) {
-                String old = books[i].getTitle();
-                books[i].setTitle(title);
+        for (Book book : books) {
+            if (book.getId() == id) {
+                String old = book.getTitle();
+                book.setTitle(title);
                 return old;
             }
         }
@@ -52,10 +54,10 @@ public class BookStorageImpl implements BookStorage {
 
     @Override
     public BigDecimal updatePrice(BigDecimal price, int id) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getId() == id) {
-                BigDecimal priceOld = books[i].getPrice();
-                books[i].setPrice(price);
+        for (Book book : books) {
+            if (book.getId() == id) {
+                BigDecimal priceOld = book.getPrice();
+                book.setPrice(price);
                 return priceOld;
             }
         }
@@ -64,10 +66,10 @@ public class BookStorageImpl implements BookStorage {
 
     @Override
     public String updateDescription(String desc, int id) {
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getId() == id) {
-                String descOld = books[i].getDescription();
-                books[i].setDescription(desc);
+        for (Book book : books) {
+            if (book.getId() == id) {
+                String descOld = book.getDescription();
+                book.setDescription(desc);
                 return descOld;
             }
         }

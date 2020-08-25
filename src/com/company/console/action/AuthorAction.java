@@ -1,12 +1,10 @@
 package com.company.console.action;
 
 import com.company.console.validator.AuthorValidator;
-import com.company.console.validator.BookValidator;
 import com.company.domain.Author;
 import com.company.service.AuthorService;
 import com.company.service.AuthorServiceImpl;
-import com.company.service.exception.AddressException;
-import com.company.service.exception.AuthorException;
+import com.company.console.exception.AuthorException;
 
 import static com.company.console.util.Reader.*;
 import static com.company.console.util.Reader.readString;

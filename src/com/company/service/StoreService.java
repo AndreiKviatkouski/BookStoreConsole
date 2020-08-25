@@ -2,7 +2,7 @@ package com.company.service;
 
 import com.company.domain.Address;
 import com.company.domain.Store;
-import com.company.service.exception.StorageException;
+import com.company.console.exception.StorageException;
 
 public interface StoreService {
     boolean save(Store store);

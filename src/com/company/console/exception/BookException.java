@@ -1,4 +1,4 @@
-package com.company.service.exception;
+package com.company.console.exception;
 
 public class BookException extends Exception {
     public BookException() {
