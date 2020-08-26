@@ -1,5 +1,6 @@
 package com.company.console.action;
 
+import com.company.console.ConsoleApplication;
 import com.company.console.validator.BookValidator;
 import com.company.domain.Author;
 import com.company.domain.Book;
@@ -176,6 +177,20 @@ public class BookAction {
         Book[] all = bookService.getAll();
         for (int i = 0; i < all.length; i++) {
             writeString((i + 1) + " " + all[i].getTitle());
+        }
+        writeString("Choice book");
+        int i = readInt() - 1;
+        Book book = all[i];
+        writeString("Book " + book.getTitle() + " " + book.getAuthor().getFullName() + " " + book.getPrice());
+        writeString("0 - Back");
+        writeString("1 - Add to basket");
+        switch (readInt()){
+            case 0: return;
+            case 1:
+                ConsoleApplication.session.getBasket().add(book);
+                break;
+            default:
+                writeString("Operation not found");
         }
     }
 

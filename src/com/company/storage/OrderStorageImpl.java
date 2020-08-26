@@ -1,10 +1,10 @@
 package com.company.storage;
+
 import com.company.domain.Book;
 import com.company.domain.Order;
 import com.company.domain.Store;
 import com.company.domain.User;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
 
 import static com.company.domain.Status.ACTIVE;
@@ -18,7 +18,7 @@ public class OrderStorageImpl implements OrderStorage {
     private static AddressStorage addressStorage = new AddressStorageImpl();
 
     static {
-        orders[0]= new Order(1,userStorage.getById(1),addressStorage.getById(1),storeStorage.get(1),ACTIVE,PICKUP,bookStorage.getAll(),bookStorage.getById(1).getPrice());
+        orders[0] = new Order(1, userStorage.getById(1), addressStorage.getById(1), storeStorage.get(1), ACTIVE, PICKUP, bookStorage.getAll(), bookStorage.getById(1).getPrice());
     }
 
     // TODO: 23.08.2020 Реализовать OrderStorage
@@ -137,7 +137,14 @@ public class OrderStorageImpl implements OrderStorage {
                 count++;
             }
         }
-        return Arrays.copyOf(orders, count);
+        Order[] orders = new Order[count];
+        int ordersIndex = 0;
+        for (Order order : orders) {
+            if(order.getUser().equals(user)){
+                orders[ordersIndex++] = order;
+            }
+        }
+        return orders;
     }
 
     @Override
@@ -148,17 +155,23 @@ public class OrderStorageImpl implements OrderStorage {
                 count++;
             }
         }
-        return Arrays.copyOf(orders, count);
+        Order[]orders1 = new Order[count];
+        int index =0 ;
+        for (Order order : orders1) {
+            if (order.getStore().equals(store)){
+                orders1[index++]=order;
+            }
+        }
+        return orders1;
     }
 
     @Override
     public boolean contains(Order order) {
-        for (Order value : orders) {
-            if (value.equals(order)) {
+        for (int i = 0; i < orders.length; i++) {
+            if (orders[i].equals(order)) {
                 return true;
             }
         }
-
         return false;
     }
 

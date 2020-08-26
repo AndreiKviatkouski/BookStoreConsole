@@ -129,4 +129,27 @@ public class Order {
     }
 
 
+    public String toString2(String s) {
+        return "Order{" +
+                " Name=" + user.getName() +
+                ", Delivery address=" + address.getStreet() +"-"+ address.getHome()+
+                ", status=" + status +
+                ", books=" + Arrays.toString(books) +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", user=" + user +
+                ", address=" + address +
+                ", store=" + store +
+                ", status=" + status +
+                ", type=" + type +
+                ", books=" + Arrays.toString(books) +
+                ", totalPrice=" + totalPrice +
+                '}';
+    }
 }

@@ -99,5 +99,12 @@ public class Book {
                 ", price=" + price +
                 ", author='" + author + '\'' +
                 '}';
+
+    }
+    public String toString2() {
+        return "Book{" +
+                ", title='" + title + '\'' +
+                '}';
+
     }
 }

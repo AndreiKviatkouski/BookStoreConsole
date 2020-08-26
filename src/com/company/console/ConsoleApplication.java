@@ -2,9 +2,9 @@ package com.company.console;
 
 import com.company.console.action.*;
 import com.company.domain.Role;
-import com.company.session.Session;
 
 import static com.company.console.util.Reader.readInt;
+import static com.company.console.util.Writer.writeObject;
 import static com.company.console.util.Writer.writeString;
 
 public class ConsoleApplication {
@@ -16,6 +16,8 @@ public class ConsoleApplication {
     private UserAction userAction = new UserAction();
     private AddressAction addressAction = new AddressAction();
     private StoreAction storeAction = new StoreAction();
+    private OrderAction orderAction = new OrderAction();
+    private BasketAction basketAction = new BasketAction();
 
 
     public void run() {
@@ -75,7 +77,13 @@ public class ConsoleApplication {
                                 writeString("Operation not found");
                                 continue;
                         }
-
+                    case 7:
+                        basketMenu();
+                        switch (readInt()){
+                            case 0: continue;
+                            case 1: orderAction.add();
+                        }
+                        break;
                     default:
                         writeString("Operation not found");
 
@@ -245,7 +253,7 @@ public class ConsoleApplication {
                                 storeAction.updateAddressById();
                                 break;
                             case 4:
-                               storeAction.deleteById();
+                                storeAction.deleteById();
                                 break;
                             case 5:
                                 storeAction.deleteStore();
@@ -269,6 +277,12 @@ public class ConsoleApplication {
         }
     }
 
+    private void basketMenu() {
+        basketAction.findAll();
+        writeString("0 - Back");
+        writeString("1 - Create order");
+    }
+
     private void showRegMenu() {
         System.err.println("Bookstore Main Menu");
         writeString("0  - Exit");
@@ -285,6 +299,7 @@ public class ConsoleApplication {
         writeString("4  - Find all books by id");
         writeString("5  - Find all books by price");
         writeString("6  - Show menu update user ");
+        writeString("7  - Basket");
     }
 
     private void showUpdateUserMenu() {

@@ -1,12 +1,13 @@
 package com.company.console.action;
 
+import com.company.console.Basket;
 import com.company.console.ConsoleApplication;
 import com.company.console.util.Reader;
 import com.company.console.util.Writer;
 
 import com.company.console.validator.UserValidator;
 
-import com.company.session.Session;
+import com.company.console.Session;
 import com.company.domain.User;
 import com.company.service.UserService;
 import com.company.service.UserServiceImpl;
@@ -41,7 +42,7 @@ public class UserAction {
         User userByPassword = userService.checkUser(login, password);
         if (userByPassword != null) {
             writeString("Hello " + userByPassword.getName() + "! , " + "Authorization is successful");
-            ConsoleApplication.session = new Session(userByPassword);
+            ConsoleApplication.session = new Session(userByPassword, new Basket());
         } else {
             writeString("Wrong password!");
         }
