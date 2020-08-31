@@ -11,6 +11,7 @@ public class StoreStorageImpl implements StoreStorage {
 
     static {
         stores[0] = new Store(1, "BookStore#1", addressStorage.getById(1));
+        stores[1] = new Store(2, "BookStore#2", addressStorage.getById(1));
     }
 
     @Override
@@ -78,7 +79,7 @@ public class StoreStorageImpl implements StoreStorage {
     public Store[] getAll() {
         int count = 0;
         for (int i = 0; i < stores.length; i++) {
-            if (stores[i] == null) {
+            if (stores[i] != null) {
                 count++;
             }
         }

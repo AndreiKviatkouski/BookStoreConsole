@@ -104,6 +104,7 @@ public class BookStorageImpl implements BookStorage {
     @Override
     public Book getById(int id) {
         for (int i = 0; i < books.length; i++) {
+            if (books[i] == null) break;
             if (books[i].getId() == id) {
                 return books[i];
             }

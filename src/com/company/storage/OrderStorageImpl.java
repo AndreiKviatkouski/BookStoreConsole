@@ -167,8 +167,9 @@ public class OrderStorageImpl implements OrderStorage {
 
     @Override
     public boolean contains(Order order) {
-        for (int i = 0; i < orders.length; i++) {
-            if (orders[i].equals(order)) {
+        for (Order value : orders) {
+            if (value == null)break;
+            if (value.equals(order)) {
                 return true;
             }
         }
@@ -178,6 +179,7 @@ public class OrderStorageImpl implements OrderStorage {
     @Override
     public boolean contains(int id) {
         for (Order order : orders) {
+            if (order==null)break;
             if (order.getId() == id) {
                 return true;
             }
@@ -188,6 +190,7 @@ public class OrderStorageImpl implements OrderStorage {
     @Override
     public boolean contains(User user) {
         for (Order order : orders) {
+            if (order==null)break;
             if (order.getUser().equals(user)) {
                 return true;
             }

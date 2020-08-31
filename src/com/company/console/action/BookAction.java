@@ -68,9 +68,7 @@ public class BookAction {
         }
         try {
             bookService.updateTitleById(title, id);
-        } catch (UserException e) {
-            System.err.println(e.getMessage());
-        } catch (BookException e) {
+        } catch (UserException | BookException e) {
             System.err.println(e.getMessage());
         }
     }
